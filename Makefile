@@ -1,5 +1,5 @@
 
-VERSION=5.4.0a
+VERSION=5.4.0b
 
 all: container
 
