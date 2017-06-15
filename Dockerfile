@@ -1,69 +1,90 @@
-FROM kibana:5.4.0
 
-RUN apt-get update
-RUN apt-get -y install git
-RUN apt-get -y install npm
+FROM docker.elastic.co/kibana/kibana:5.4.1
 
+USER root
 
-#RUN /usr/share/kibana/bin/kibana-plugin install https://github.com/elo7/cohort/releases/download/5.4.0/cohort-5.4.0.zip
+RUN yum install -y git
+RUN yum install -y unzip
 
-#RUN /usr/share/kibana/bin/kibana-plugin install https://github.com/DeanF/health_metric_vis/releases/download/v0.3.5/health_metric_vis-5.4.0.zip
-
-WORKDIR /usr/share/kibana/plugins
-RUN git clone https://github.com/virusu/3D_kibana_charts_vis.git 3D_kibana_charts_vis
-WORKDIR 3D_kibana_charts_vis
-RUN sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.0"/' package.json
-RUN npm install
+COPY cohort.zip /tmp
 
 WORKDIR /usr/share/kibana/plugins
-RUN git clone https://github.com/mstoyano/kbn_c3js_vis.git c3_charts
-WORKDIR c3_charts
-RUN sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.0"/' package.json
-RUN npm install
 
-#WORKDIR /usr/share/kibana/plugins
-#RUN git clone https://github.com/JuanCarniglia/area3d_vis
-#WORKDIR area3d_vis
-#RUN npm install
+RUN unzip /tmp/cohort.zip
+RUN mv kibana/cohort .
+RUN rmdir kibana
 
+COPY 3d-charts.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
-RUN git clone https://github.com/sbeyn/kibana-plugin-traffic-sg traffic-sg
+RUN mkdir 3d-charts
+WORKDIR 3d-charts
+RUN tar xvfz /tmp/3d-charts.tgz
+
+COPY c3-charts.tgz /tmp
+WORKDIR /usr/share/kibana/plugins
+RUN mkdir c3-charts
+WORKDIR c3-charts
+RUN tar xvfz /tmp/c3-charts.tgz
+RUN mv package/* .
+RUN rm -rf package
+
+COPY area3d.tgz /tmp
+WORKDIR /usr/share/kibana/plugins
+RUN mkdir area3d
+WORKDIR area3d
+RUN tar xvfz /tmp/area3d.tgz
+RUN mv package/* .
+RUN rm -rf package
+
+COPY traffic-sg.tgz /tmp
+WORKDIR /usr/share/kibana/plugins
+RUN mkdir traffic-sg
 WORKDIR traffic-sg
-RUN grep version package.json
-RUN sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.0"/' package.json
-RUN grep version package.json
+RUN tar xvfz /tmp/traffic-sg.tgz
+RUN mv package/* .
+RUN rm -rf package
 
+COPY gauge-sg.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
-RUN git clone https://github.com/sbeyn/kibana-plugin-gauge-sg guage_sg
-WORKDIR guage_sg
-RUN grep version package.json
-RUN sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.0"/' package.json
-RUN grep version package.json
+RUN mkdir gauge-sg
+WORKDIR gauge-sg
+RUN tar xvfz /tmp/gauge-sg.tgz
+RUN mv package/* .
+RUN rm -rf package
 
+COPY network.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
-RUN git clone https://github.com/dlumbrer/kbn_network.git network_vis
-WORKDIR network_vis
-RUN grep version package.json
-RUN sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.0"/' package.json
-RUN grep version package.json
-RUN npm install
+RUN mkdir network
+WORKDIR network
+RUN tar xvfz /tmp/network.tgz
+RUN mv package/* .
+RUN rm -rf package
 
-#RUN git clone https://github.com/elastic/eslint-config-kibana.git /tmp/eslint
-#WORKDIR /tmp/eslint
-#RUN npm install
+COPY eslint.tgz /tmp
+WORKDIR /usr/share/kibana/plugins
+RUN mkdir eslint
+WORKDIR eslint
+RUN tar xvfz /tmp/eslint.tgz
+RUN mv package/* .
+RUN rm -rf package
 
-#WORKDIR /usr/share/kibana/plugins
-#RUN git clone https://github.com/prelert/kibana-swimlane-vis swimlane-vis
-#WORKDIR swimlane-vis
-#RUN grep version package.json
-#RUN sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.0"/' package.json
-#RUN grep version package.json
-#RUN npm install
+COPY swimlane.tgz /tmp
+WORKDIR /usr/share/kibana/plugins
+RUN mkdir swimlane
+WORKDIR swimlane
+RUN tar xvfz /tmp/swimlane.tgz
+RUN mv package/* .
+RUN rm -rf package
 
-#WORKDIR /usr/share/kibana/plugins
-#RUN git clone https://github.com/nreese/enhanced_tilemap
-#WORKDIR enhanced_tilemap
-#RUN npm install
+COPY enhanced-tilemap.tgz /tmp
+WORKDIR /usr/share/kibana/plugins
+RUN mkdir enhanced-tilemap
+WORKDIR enhanced-tilemap
+RUN tar xvfz /tmp/enhanced-tilemap.tgz
+RUN mv package/* .
+RUN rm -rf package
+
+USER kibana
 
 WORKDIR /
 
