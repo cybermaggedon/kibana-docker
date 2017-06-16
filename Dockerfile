@@ -25,64 +25,48 @@ WORKDIR /usr/share/kibana/plugins
 RUN mkdir c3-charts
 WORKDIR c3-charts
 RUN tar xvfz /tmp/c3-charts.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY area3d.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir area3d
 WORKDIR area3d
 RUN tar xvfz /tmp/area3d.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY traffic-sg.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir traffic-sg
 WORKDIR traffic-sg
 RUN tar xvfz /tmp/traffic-sg.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY gauge-sg.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir gauge-sg
 WORKDIR gauge-sg
 RUN tar xvfz /tmp/gauge-sg.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY network.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir network
 WORKDIR network
 RUN tar xvfz /tmp/network.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY eslint.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir eslint
 WORKDIR eslint
 RUN tar xvfz /tmp/eslint.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY swimlane.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir swimlane
 WORKDIR swimlane
 RUN tar xvfz /tmp/swimlane.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 COPY enhanced-tilemap.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
 RUN mkdir enhanced-tilemap
 WORKDIR enhanced-tilemap
 RUN tar xvfz /tmp/enhanced-tilemap.tgz
-RUN mv package/* .
-RUN rm -rf package
 
 USER kibana
 
