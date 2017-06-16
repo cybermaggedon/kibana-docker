@@ -1,5 +1,5 @@
 
-VERSION=5.4.1a
+VERSION=5.4.1b
 
 PLUGINS=cohort.zip 3d-charts.tgz c3-charts.tgz area3d.tgz traffic-sg.tgz \
 	gauge-sg.tgz network.tgz eslint.tgz swimlane.tgz enhanced-tilemap.tgz

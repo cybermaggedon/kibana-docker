@@ -50,11 +50,11 @@ RUN mkdir network
 WORKDIR network
 RUN tar xvfz /tmp/network.tgz
 
-COPY eslint.tgz /tmp
-WORKDIR /usr/share/kibana/plugins
-RUN mkdir eslint
-WORKDIR eslint
-RUN tar xvfz /tmp/eslint.tgz
+#COPY eslint.tgz /tmp
+#WORKDIR /usr/share/kibana/plugins
+#RUN mkdir eslint
+#WORKDIR eslint
+#RUN tar xvfz /tmp/eslint.tgz
 
 COPY swimlane.tgz /tmp
 WORKDIR /usr/share/kibana/plugins
