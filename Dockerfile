@@ -62,11 +62,11 @@ RUN mkdir swimlane
 WORKDIR swimlane
 RUN tar xvfz /tmp/swimlane.tgz
 
-COPY enhanced-tilemap.tgz /tmp
-WORKDIR /usr/share/kibana/plugins
-RUN mkdir enhanced-tilemap
-WORKDIR enhanced-tilemap
-RUN tar xvfz /tmp/enhanced-tilemap.tgz
+#COPY enhanced-tilemap.tgz /tmp
+#WORKDIR /usr/share/kibana/plugins
+#RUN mkdir enhanced-tilemap
+#WORKDIR enhanced-tilemap
+#RUN tar xvfz /tmp/enhanced-tilemap.tgz
 
 USER kibana
 
