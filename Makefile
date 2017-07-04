@@ -1,5 +1,5 @@
 
-VERSION=5.4.3a
+VERSION=5.4.3b
 
 PLUGINS=cohort.zip 3d-charts.tgz c3-charts.tgz area3d.tgz traffic-sg.tgz \
 	gauge-sg.tgz network.tgz eslint.tgz swimlane.tgz enhanced-tilemap.tgz
@@ -71,12 +71,12 @@ swimlane.tgz:
 	cd swimlane && npm install
 	cd swimlane && tar cfz ../$@ .
 
-enhanced-tilemap.tgz:
-	rm -rf enhanced-tilemap
-	git clone https://github.com/nreese/enhanced_tilemap enhanced-tilemap
-	sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.3"/' enhanced-tilemap/package.json
-	cd enhanced-tilemap && npm install
-	cd enhanced-tilemap && tar cfz ../$@ .
+#enhanced-tilemap.tgz:
+#	rm -rf enhanced-tilemap
+#	git clone https://github.com/nreese/enhanced_tilemap enhanced-tilemap
+#	sed -i -e 's/"version":[ \t]*".*"/"version": "5.4.3"/' enhanced-tilemap/package.json
+#	cd enhanced-tilemap && npm install
+#	cd enhanced-tilemap && tar cfz ../$@ .
 
 container:
 	docker build -t cybermaggedon/kibana:${VERSION} .
